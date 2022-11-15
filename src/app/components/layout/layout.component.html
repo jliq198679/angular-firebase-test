@@ -1,5 +1,26 @@
-<div class="ui-gap">
-    <b>Cargando.... {{loading$ | async | json}}</b>
-    <app-product-panel></app-product-panel>
+<mat-card>
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
 
-</div>
+      <h4>PANEL DE PRODUCTOS</h4>
+      <button mat-button class="btn-add" (click)="addProduct()" fxLayout="row"  fxLayoutAlign="space-around center">
+        <mat-icon>add</mat-icon>
+        <span>Añadir</span>
+     </button>
+
+
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <p></p>
+  <mat-card-content class="card-content">
+      <app-product-panel *ngIf="!(loading$ | async); else loader"></app-product-panel>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #loader>
+  <div fxLayout="column" fxLayoutAlign="center center" class="loader-content">
+    <mat-spinner></mat-spinner>
+    <p></p>
+    <h4>Cargando productos...</h4>
+  </div>
+</ng-template>
+

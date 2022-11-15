@@ -21,10 +21,11 @@ export class LayoutComponent implements OnInit {
     this.loading$ = this.store.select(selectLoading)
 
     this.store.dispatch(loadProducts())
-
-
   }
 
+  addProduct() {
+
+  }
 
 
 }
