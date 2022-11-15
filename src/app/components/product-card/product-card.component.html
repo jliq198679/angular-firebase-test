@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <h4>{{product?.name | uppercase }}</h4>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <div fxLayout="column" class="card-content">
+    <span>Precio: {{product?.price}} USD</span>
+    <span>Serie: {{product?.serial_number}}</span>
+  </div>
+  <mat-card-actions>
+    <button mat-button class="btn-action" (click)="editProduct(product)">
+       <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-button class="btn-action" (click)="removeProduct(product.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,5 +1,5 @@
 import { ProductsState } from '../../models/product.state';
-import { createSelector } from '@ngrx/store'; //TODO <----
+import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 
 export const selectProductsFeature = (state: AppState) => state.products;
