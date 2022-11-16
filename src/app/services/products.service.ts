@@ -1,7 +1,10 @@
+
 import { ProductModel } from './../models/product.interface';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators'
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,37 +14,24 @@ export class ProductsService {
   // Mock data
   data: ProductModel[] = this.mockDataList;
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { }
 
-  get(): Observable<any> {
-    return of(this.data).pipe(
-      delay(1500)
-    )
+  get(): Observable<any[]> {
+      return this.db.collection('products').valueChanges({ idField: 'id' });
   }
 
   add(product: ProductModel): Observable<any> {
-    this.data.push(product)
-    return of(this.data).pipe(
-      delay(1500)
-    )
+    const id = this.db.createId()
+    return from(this.db.collection("products").doc(id).set({ ...product, id }))
   }
 
   edit(product: ProductModel): Observable<any> {
-    const index = this.data.findIndex(p=>p.id=== product.id)
-    this.data[index] = product;
-
-    return of(this.data).pipe(
-      delay(1500)
-    )
+    return from(this.db.collection('products').doc(product.id).update(product));
   }
 
   remove(id: string): Observable<any> {
-    const index = this.data.findIndex(p=>p.id=== id)
-    this.data.splice(index, 1);
-
-    return of(this.data).pipe(
-      delay(1500)
-    )
+    console.log(id)
+    return from(this.db.collection('products').doc(id).delete());
   }
 
   get mockDataList(): ProductModel[] {

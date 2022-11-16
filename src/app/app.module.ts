@@ -27,6 +27,12 @@ import { ProductEditorComponent } from './components/product-editor/product-edit
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
+// firebase
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,17 +60,21 @@ import { MatInputModule } from '@angular/material/input';
     MatSnackBarModule,
     // Form
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // Firebase
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [
-    /*{
+    {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {hasBackdrop: false}
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {duration: 2500, horizontalPosition: 'right'}
-    }*/
+    }
   ],
   bootstrap: [AppComponent]
 })

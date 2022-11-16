@@ -1,8 +1,7 @@
-import { addedProduct } from './../../state/actions/products.actions';
+import { editProduct, removeProduct } from './../../state/actions/products.actions';
 import { Store } from '@ngrx/store';
 import { ProductModel } from './../../models/product.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import { removedProduct } from 'src/app/state/actions/products.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ProductEditorComponent } from '../product-editor/product-editor.component';
@@ -30,7 +29,9 @@ export class ProductCardComponent implements OnInit {
     .afterClosed()
     .subscribe(async (product: ProductModel) => {
       if (product) {
-        this.store.dispatch(addedProduct({product}));
+        console.log(product)
+        console.log(this.product)
+        this.store.dispatch(editProduct({product}));
       }
     });
   }
@@ -42,7 +43,7 @@ export class ProductCardComponent implements OnInit {
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.store.dispatch(removedProduct({id}))
+        this.store.dispatch(removeProduct({id}))
       }
     });
   }

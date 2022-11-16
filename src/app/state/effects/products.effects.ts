@@ -21,13 +21,13 @@ export class ProductsEffects {
 
     addProduct$ = createEffect(() => this.actions$.pipe(
       ofType(ACTIONS.addProduct),
-      mergeMap((product) => this.productsService.add(product)
+      mergeMap((action) => this.productsService.add(action['product'])
           .pipe(
-              map(product => {
+              map(() => {
                 this.zone.run(() => {
                   this.snackBar.open("Producto añadido", 'X');
                 })
-                return ({ type: ACTIONS.addedProduct, product })
+                return ({ type: ACTIONS.addedProduct})
               }),
 
               catchError(() => EMPTY)
@@ -37,11 +37,13 @@ export class ProductsEffects {
 
     editProduct$ = createEffect(() => this.actions$.pipe(
       ofType(ACTIONS.editProduct),
-      mergeMap((product) => this.productsService.edit(product)
+      mergeMap((action) => this.productsService.edit(action['product'])
           .pipe(
-              map(product => {
-                this.snackBar.open("Producto actualizado", 'X');
-                return ({ type: ACTIONS.editedProduct, product })
+              map(() => {
+                this.zone.run(() => {
+                  this.snackBar.open("Producto actualizado", 'X');
+                })
+                return ({ type: ACTIONS.editedProduct })
               }),
               catchError(() => EMPTY)
           ))
@@ -50,9 +52,14 @@ export class ProductsEffects {
 
     removeProduct$ = createEffect(() => this.actions$.pipe(
       ofType(ACTIONS.removeProduct),
-      mergeMap((id) => this.productsService.remove(id)
+      mergeMap((action) => this.productsService.remove(action['id'])
           .pipe(
-              map(id => ({ type: ACTIONS.removedProduct, id })),
+              map(() => {
+                this.zone.run(() => {
+                  this.snackBar.open("Producto eliminado", 'X');
+                })
+                return ({ type: ACTIONS.removedProduct })
+              }),
               catchError(() => EMPTY)
           ))
     )

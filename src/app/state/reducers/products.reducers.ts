@@ -19,37 +19,19 @@ export const productsReducer = createReducer(
     on(editProduct, (state) => {
       return { ...state, loading: true }
     }),
-    on(removeProduct, (state) => {
+    on(removeProduct, (state, { id }) => {
       return { ...state, loading: true }
     }),
     on(loadedProducts, (state, { products }) => {
         return { ...state, loading: false, products }
     }),
-    on(addedProduct, (state, { product }) => {
-      if (state.products.findIndex(p=>p.name===product.name) > -1) return state;
-
-      return {
-        products: [...state.products, product],
-        loading: false
-      }
+    on(addedProduct, (state) => {
+      return { ...state, loading: false }
     }),
-    on(editedProduct, (state, { product }) => {
-      const index = state.products.findIndex(p=>p.id===product.id);
-
-      if (index === -1) return state;
-
-      const currList = [...state.products];
-      currList[index] = product;
-
-      return {
-        products: currList,
-        loading: true
-      }
+    on(editedProduct, (state) => {
+      return { ...state, loading: false }
     }),
-    on(removedProduct, (state, { id }) => {
-      return {
-        products: state.products.filter((p) => p.id !== id),
-        loading: false
-      }
+    on(removedProduct, (state) => {
+      return { ...state, loading: false }
     })
 );

@@ -1,4 +1,4 @@
-import { addedProduct } from './../../state/actions/products.actions';
+import { addedProduct, addProduct } from './../../state/actions/products.actions';
 import { ProductModel } from './../../models/product.interface';
 import { ProductEditorComponent } from './../product-editor/product-editor.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit {
     .afterClosed()
     .subscribe(async (product: ProductModel) => {
       if (product) {
-        this.store.dispatch(addedProduct({product}));
+        this.store.dispatch(addProduct({product}));
       }
     });
   }

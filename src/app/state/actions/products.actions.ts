@@ -16,16 +16,16 @@ export const loadProducts = createAction(
     ACTIONS.loadProducts
 );
 
-export const addProduct = createAction(
-  ACTIONS.addProduct
+export const addedProduct = createAction(
+  ACTIONS.addedProduct
 );
 
-export const editProduct = createAction(
-  ACTIONS.editProduct
+export const editedProduct = createAction(
+  ACTIONS.editedProduct
 );
 
-export const removeProduct = createAction(
-  ACTIONS.removeProduct
+export const removedProduct = createAction(
+  ACTIONS.removedProduct
 );
 
 export const loadedProducts = createAction(
@@ -33,17 +33,17 @@ export const loadedProducts = createAction(
   props<{ products: ProductModel[] }>()
 )
 
-export const addedProduct = createAction(
-  ACTIONS.addedProduct,
+export const addProduct = createAction(
+  ACTIONS.addProduct,
   props<{ product: ProductModel }>()
 )
 
-export const editedProduct = createAction(
-  ACTIONS.editedProduct,
+export const editProduct = createAction(
+  ACTIONS.editProduct,
   props<{ product: ProductModel }>()
 )
 
-export const removedProduct = createAction(
-  ACTIONS.removedProduct,
+export const removeProduct = createAction(
+  ACTIONS.removeProduct,
   props<{ id: string }>()
 );
