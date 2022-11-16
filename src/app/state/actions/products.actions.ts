@@ -9,7 +9,8 @@ export enum ACTIONS {
   loadedProducts = '[Product List] Loaded success',
   addedProduct =  '[Product List] Added success',
   editedProduct = '[Product List] Edited success',
-  removedProduct = '[Product List] Removed success'
+  removedProduct = '[Product List] Removed success',
+  loadProductsError = '[Product List] Load error',
 }
 
 export const loadProducts = createAction(
@@ -46,4 +47,9 @@ export const editProduct = createAction(
 export const removeProduct = createAction(
   ACTIONS.removeProduct,
   props<{ id: string }>()
+);
+
+export const loadProductsError = createAction(
+  ACTIONS.loadProductsError,
+  props<{ error: string }>()
 );

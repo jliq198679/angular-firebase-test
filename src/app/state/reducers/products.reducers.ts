@@ -1,11 +1,12 @@
 import { ProductsState } from './../../models/product.state';
-import { loadProducts, removeProduct, addProduct, editProduct, addedProduct, editedProduct, removedProduct } from './../actions/products.actions';
+import { loadProducts, removeProduct, addProduct, editProduct, addedProduct, editedProduct, removedProduct, loadProductsError } from './../actions/products.actions';
 import { loadedProducts } from '../actions/products.actions';
 import { createReducer, on } from '@ngrx/store';
 
 export const initialState: ProductsState = {
   loading: false,
-  products: []
+  products: [],
+  error: null
 }
 
 export const productsReducer = createReducer(
@@ -33,5 +34,8 @@ export const productsReducer = createReducer(
     }),
     on(removedProduct, (state) => {
       return { ...state, loading: false }
+    }),
+    on(loadProductsError, (state, {error}) => {
+      return { ...state, error }
     })
 );
