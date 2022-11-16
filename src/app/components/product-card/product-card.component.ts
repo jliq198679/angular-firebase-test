@@ -29,8 +29,7 @@ export class ProductCardComponent implements OnInit {
     .afterClosed()
     .subscribe(async (product: ProductModel) => {
       if (product) {
-        console.log(product)
-        console.log(this.product)
+        product.id = this.product.id;
         this.store.dispatch(editProduct({product}));
       }
     });
