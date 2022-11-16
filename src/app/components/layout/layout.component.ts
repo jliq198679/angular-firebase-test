@@ -1,3 +1,7 @@
+import { addedProduct } from './../../state/actions/products.actions';
+import { ProductModel } from './../../models/product.interface';
+import { ProductEditorComponent } from './../product-editor/product-editor.component';
+import { MatDialog } from '@angular/material/dialog';
 import { selectLoading } from './../../state/selectors/products.selectors';
 
 import { Component, OnInit } from '@angular/core';
@@ -14,8 +18,10 @@ export class LayoutComponent implements OnInit {
 
   loading$: Observable<boolean> = new Observable()
 
-  constructor(private store: Store<any>) {
-  }
+  constructor(
+    private store: Store<any>,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.loading$ = this.store.select(selectLoading)
@@ -23,9 +29,14 @@ export class LayoutComponent implements OnInit {
     this.store.dispatch(loadProducts())
   }
 
-  addProduct() {
-
+  showProductEditor() {
+    this.dialog.open(ProductEditorComponent, { width: "40%"})
+    .afterClosed()
+    .subscribe(async (product: ProductModel) => {
+      if (product) {
+        this.store.dispatch(addedProduct({product}));
+      }
+    });
   }
-
 
 }

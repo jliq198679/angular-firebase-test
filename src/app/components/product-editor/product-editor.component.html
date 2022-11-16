@@ -1,0 +1,35 @@
+<h4 mat-dialog-title>{{product ? 'Editar' : 'Añadir'}} producto</h4>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+      <div fxLayout="column">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="(form.get('name'))?.invalid">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+          <mat-form-field appearance="outline" fxFlex="65">
+            <mat-label>Serie</mat-label>
+            <input matInput type="text" formControlName="serial_number">
+            <mat-error *ngIf="(form.get('serial_number'))?.invalid">Este campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" floatLabel="always" fxFlex="35">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" formControlName="price" class="example-right-align">
+            <mat-error *ngIf="(form.get('price'))?.invalid">Este campo es obligatorio</mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" fxLayoutGap="10">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button (click)="addProduct()" cdkFocusInitial>{{product ? 'Actualizar' : 'Guardar'}}</button>
+</mat-dialog-actions>

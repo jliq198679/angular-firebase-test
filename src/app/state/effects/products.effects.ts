@@ -1,7 +1,8 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ACTIONS } from './../actions/products.actions';
 import { ProductsService } from './../../services/products.service';
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable, NgZone } from '@angular/core';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
@@ -22,7 +23,13 @@ export class ProductsEffects {
       ofType(ACTIONS.addProduct),
       mergeMap((product) => this.productsService.add(product)
           .pipe(
-              map(product => ({ type: ACTIONS.addedProduct, product })),
+              map(product => {
+                this.zone.run(() => {
+                  this.snackBar.open("Producto añadido", 'X');
+                })
+                return ({ type: ACTIONS.addedProduct, product })
+              }),
+
               catchError(() => EMPTY)
           ))
     )
@@ -32,7 +39,10 @@ export class ProductsEffects {
       ofType(ACTIONS.editProduct),
       mergeMap((product) => this.productsService.edit(product)
           .pipe(
-              map(product => ({ type: ACTIONS.editedProduct, product })),
+              map(product => {
+                this.snackBar.open("Producto actualizado", 'X');
+                return ({ type: ACTIONS.editedProduct, product })
+              }),
               catchError(() => EMPTY)
           ))
     )
@@ -50,6 +60,8 @@ export class ProductsEffects {
 
     constructor(
         private actions$: Actions,
-        private productsService: ProductsService
+        private productsService: ProductsService,
+        private zone: NgZone,
+        private snackBar: MatSnackBar
     ) { }
 }

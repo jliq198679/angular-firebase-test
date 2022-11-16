@@ -30,7 +30,7 @@ export const productsReducer = createReducer(
 
       return {
         products: [...state.products, product],
-        loading: true
+        loading: false
       }
     }),
     on(editedProduct, (state, { product }) => {

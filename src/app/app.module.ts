@@ -7,9 +7,6 @@ import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
-import { ProductPanelComponent } from './components/product-panel/product-panel.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Materia Modules
@@ -17,8 +14,18 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+// Componentes
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductPanelComponent } from './components/product-panel/product-panel.component';
+import { LayoutComponent } from './components/layout/layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ProductEditorComponent } from './components/product-editor/product-editor.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     LayoutComponent,
     ProductPanelComponent,
     ProductCardComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ProductEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +48,24 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatIconModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    // Form
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    /*{
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {hasBackdrop: false}
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {duration: 2500, horizontalPosition: 'right'}
+    }*/
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
