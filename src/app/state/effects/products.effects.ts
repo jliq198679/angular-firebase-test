@@ -9,7 +9,7 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 export class ProductsEffects {
 
     loadProducts$ = createEffect(() => this.actions$.pipe(
-        ofType(ACTIONS.createAction),
+        ofType(ACTIONS.loadProducts),
         mergeMap(() => this.productsService.get()
             .pipe(
                 map(products => ({ type: ACTIONS.loadedProducts, products })),

@@ -2,7 +2,7 @@ import { ProductModel } from './../../models/product.interface';
 import { createAction, props } from '@ngrx/store';
 
 export enum ACTIONS {
-  createAction = '[Product List] Load products',
+  loadProducts = '[Product List] Load products',
   addProduct = '[Product List] Add product',
   editProduct = '[Product List] Edit product',
   removeProduct = '[Product List] Remove product',
@@ -13,7 +13,7 @@ export enum ACTIONS {
 }
 
 export const loadProducts = createAction(
-    ACTIONS.createAction
+    ACTIONS.loadProducts
 );
 
 export const addProduct = createAction(

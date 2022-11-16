@@ -49,7 +49,7 @@ export const productsReducer = createReducer(
     on(removedProduct, (state, { id }) => {
       return {
         products: state.products.filter((p) => p.id !== id),
-        loading: true
+        loading: false
       }
     })
 );

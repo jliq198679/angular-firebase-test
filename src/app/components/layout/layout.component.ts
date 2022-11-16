@@ -14,7 +14,7 @@ export class LayoutComponent implements OnInit {
 
   loading$: Observable<boolean> = new Observable()
 
-  constructor(private store: Store<any>,) {
+  constructor(private store: Store<any>) {
   }
 
   ngOnInit(): void {
