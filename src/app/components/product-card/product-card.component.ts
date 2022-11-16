@@ -1,10 +1,11 @@
-import { MatDialogModule } from '@angular/material/dialog';
+import { addedProduct } from './../../state/actions/products.actions';
 import { Store } from '@ngrx/store';
 import { ProductModel } from './../../models/product.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { removedProduct } from 'src/app/state/actions/products.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ProductEditorComponent } from '../product-editor/product-editor.component';
 
 @Component({
   selector: 'app-product-card',
@@ -21,8 +22,17 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  editProduct(product: ProductModel) {
-
+  showProductEditor(product: ProductModel) {
+    this.dialog.open(ProductEditorComponent, {
+      width: "40%",
+      data: product
+    })
+    .afterClosed()
+    .subscribe(async (product: ProductModel) => {
+      if (product) {
+        this.store.dispatch(addedProduct({product}));
+      }
+    });
   }
 
   removeProduct(id: string) {
